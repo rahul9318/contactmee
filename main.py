@@ -2,6 +2,8 @@ from flask import Flask
 from flask import render_template
 from flask import  request, redirect
 import smtplib
+from twilio.rest import Client
+import config
 
 app = Flask(__name__)
 
@@ -34,6 +36,15 @@ def gfg():
        # connection.sendmail(from_addr=my_email, to_addrs="rahulbhardwaj8851046@gmail.com",msg=message)
        #
        # connection.close
+       client = Client(config.account_sid, config.auth_token)
+
+       message = client.messages \
+           .create(
+           body=message,
+           from_="+15407014775",
+           to="+919318407582  "
+       )
+
 
     return render_template("index.html")
 
